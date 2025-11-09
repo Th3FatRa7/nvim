@@ -1,4 +1,3 @@
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,15 +14,30 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- import your plugins
-    { import = "plugins" },
+    {
+      'nvim-telescope/telescope.nvim', tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+    {'ThePrimeagen/harpoon'},
+    {
+      "mason-org/mason-lspconfig.nvim",
+      opts = {
+	ensure_installed = {
+	  'lua_ls',
+	  'clangd',
+	  'marksman'
+	}
+      },
+      dependencies = {
+	{ "mason-org/mason.nvim", opts = {} },
+	"neovim/nvim-lspconfig",
+      },
+    },
+    {'nvim-tree/nvim-tree.lua'},
+    {'rebelot/kanagawa.nvim'},
   },
-  install = { colorscheme = { 'tokyonight' } },
-  -- automatically check for plugin updates
   checker = { enabled = true },
 })
-
-vim.cmd("colorscheme tokyonight")

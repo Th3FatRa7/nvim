@@ -1,0 +1,5 @@
+require('th3fatra7.remap')
+require('th3fatra7.lazy')
+require('th3fatra7.options')
+require('th3fatra7.lsp')
+require('th3fatra7.colors')

@@ -1,1 +1,1 @@
-require('config')
+require('th3fatra7')
